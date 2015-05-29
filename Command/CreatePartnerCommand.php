@@ -29,7 +29,7 @@ class CreatePartnerCommand extends ContainerAwareCommand
         $name = $input->getArgument('name');
         $login = $input->getArgument('login');
         $role = $input->getArgument('role');
-        
+
         $partner = $partnerManager->createNewPartner($name, $login, $role);
         
         if($partner) {

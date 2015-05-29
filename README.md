@@ -33,7 +33,7 @@ class AppKernel extends Kernel
         $bundles = array(
             // ...
 
-            new Stadline\WSSESecurityBundle\WSSESecurityBundle(),
+            new Stadline\WSSESecurityBundle\StadlineWSSESecurityBundle(),
         );
 
         // ...
@@ -43,15 +43,50 @@ class AppKernel extends Kernel
 }
 ```
 
-Step 3: Update your database
+Step 3: Update your config.yml
 -------------------------
 
-Step 4: Add provider to your security.yml
+```
+    stadline_wssesecurity: ~
+```
+
+Step 4: Update your database
 -------------------------
 
-Step 5: Bonus
+```
+    app/console doctrine:migrations:diff
+    app/console doctrine:migrations:migrate
+```
+
+Step 5: Add provider to your security.yml
 -------------------------
 
-Command Line to handler partners : Create and renew password
-Command Line to handler partners
+```
+    providers:
+        api_partner:
+            id: api.partner.user.provider
 
+    firewalls:
+        api:
+            pattern:            ^/api
+            anonymous:          true
+            wsse:               true
+            provider:           api_partner
+
+```
+
+Usage
+============
+
+Start by creating a new Partner
+
+```
+    app/console console wsse:partner:create api-test api-test ROLE_API
+```
+
+Test your API with real X-WSSE Header
+
+```
+    app/console console wsse:wsse-generator api-test
+    > UsernameToken Username="api-test", PasswordDigest="MgLLsYsJ3hg/p/dnXCm1H8DkJNA=", Nonce="unjRzavW6hCCTv5zI/YXWA==", Created="2015-05-29T15:46:15Z"
+```

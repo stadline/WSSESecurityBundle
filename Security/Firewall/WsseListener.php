@@ -47,21 +47,6 @@ class WsseListener implements ListenerInterface
         $token->nonce    = $matches[3];
         $token->created  = $matches[4];
         
-        //WSSE ProxyUser 
-        if (!$request->headers->has('x-proxy-token')
-        ) {
-            // no x-proxy-token, deny authentication with a '403 Forbidden'
-            $response = new Response();
-            $response->setStatusCode(403);
-            $event->setResponse($response);
-            return;
-        }
-        
-        $xProxyToken = $request->headers->get('x-proxy-token');
-        
-        //Set the proxyUser
-        $token->setProxyUserToken($xProxyToken);
-        
         try {
             $authToken = $this->authenticationManager->authenticate($token);
         

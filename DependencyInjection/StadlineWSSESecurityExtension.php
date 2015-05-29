@@ -24,5 +24,7 @@ class StadlineWSSESecurityExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->setParameter('stadline_wsse_security.security_enabled',      $config['security_enabled']);
     }
 }

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Partner
  *
- * @ORM\Table(name="partner")
+ * @ORM\Table(name="wsse_partner")
  * @ORM\Entity(repositoryClass="Stadline\WSSESecurityBundle\Entity\PartnerRepository")
  */
 class Partner

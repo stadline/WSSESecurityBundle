@@ -34,35 +34,4 @@ class WsseUserToken extends AbstractToken
     {
         return $this->getRoles();
     }
-    
-    /**
-     * Define the proxyUser given by the app
-     * 
-     * @param AbstractProxyUser $abstractUser
-     */
-    public function setProxyUserToken($token)
-    {
-        if(in_array(new Role('ROLE_SAV'), $this->getRoles())) {
-            $this->proxyUser = new SAVProxyUser($token);
-        } elseif(in_array(new Role('ROLE_REPAIRER'), $this->getRoles())) {
-            $this->proxyUser = new RepairerProxyUser($token);
-        } else {
-            $this->proxyUser = $token;
-        }
-    }
-    
-    public function getProxyUser()
-    {
-        return $this->proxyUser;
-    }
-    
-    public function getProxyUserToken()
-    {
-        if($this->proxyUser instanceof AbstractProxyUser) {
-            return $this->proxyUser->getToken();
-        } else {
-            return (string) $this->proxyUser;
-        }
-    }
-
 }

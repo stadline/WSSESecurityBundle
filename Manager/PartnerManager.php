@@ -43,7 +43,7 @@ class PartnerManager implements PartnerManagerInterface
         return $query->getSingleResult();
     }
 
-    public function createNewPartner($name, $login, $role='ROLE_SAV')
+    public function createNewPartner($name, $login, $role='ROLE_API')
     {
         //If it exist
         if($this->getRepository()->findOneBy(array('login' => $login))) {

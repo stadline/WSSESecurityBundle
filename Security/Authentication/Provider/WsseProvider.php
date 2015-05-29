@@ -15,7 +15,7 @@ class WsseProvider implements AuthenticationProviderInterface
     private $cacheDir;
     private $skipValidateDigest;
     
-    public function __construct(UserProviderInterface $userProvider, $cacheDir, $skipValidateDigest = true)
+    public function __construct(UserProviderInterface $userProvider, $cacheDir, $skipValidateDigest = false)
     {
         $this->userProvider = $userProvider;
         $this->cacheDir = $cacheDir;
@@ -33,10 +33,7 @@ class WsseProvider implements AuthenticationProviderInterface
         if ($user && $this->validateDigest($token->digest, $token->nonce, $token->created, $user->getPassword())) {
             $authenticatedToken = new WsseUserToken($user->getRoles());
             $authenticatedToken->setUser($user);
-            //Pass the ProxyUser
-            if($token instanceof WsseUserToken) {
-                $authenticatedToken->setProxyUserToken($token->getProxyUserToken());
-            }
+
             return $authenticatedToken;
         }
         
