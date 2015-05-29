@@ -12,5 +12,10 @@
             "email": "fabien.rondeau@stadline.com"
         }
     ],
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-0": { "Stadline\\WSSESecurityBundle": "" }
+    },
+
+    "target-dir": "Stadline/WSSESecurityBundle"
 }
