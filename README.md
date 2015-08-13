@@ -47,7 +47,7 @@ Step 3: Update your config.yml
 -------------------------
 
 ```
-    stadline_wssesecurity: ~
+    stadline_wsse_security: ~
 ```
 
 Step 4: Update your database
