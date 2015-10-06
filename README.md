@@ -1,7 +1,18 @@
 Installation
 ============
 
-Step 1: Download the Bundle
+Step 1: Add a repository to composer
+------------------------------------
+Add a new repository to your composer.json
+```yml
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/stadline/WSSESecurityBundle.git"
+        }
+    ]
+```
+Step 2: Download the Bundle
 ---------------------------
 
 Open a command console, enter your project directory and execute the
@@ -15,7 +26,7 @@ This command requires you to have Composer installed globally, as explained
 in the [installation chapter](https://getcomposer.org/doc/00-intro.md)
 of the Composer documentation.
 
-Step 2: Enable the Bundle
+Step 3: Enable the Bundle
 -------------------------
 
 Then, enable the bundle by adding the following line in the `app/AppKernel.php`
@@ -43,14 +54,14 @@ class AppKernel extends Kernel
 }
 ```
 
-Step 3: Update your config.yml
+Step 4: Update your config.yml
 -------------------------
 
 ```
     stadline_wsse_security: ~
 ```
 
-Step 4: Update your database
+Step 5: Update your database
 -------------------------
 
 ```
@@ -58,7 +69,7 @@ Step 4: Update your database
     app/console doctrine:migrations:migrate
 ```
 
-Step 5: Add provider to your security.yml
+Step 6: Add provider to your security.yml
 -------------------------
 
 ```
