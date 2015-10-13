@@ -58,11 +58,14 @@ class WsseProvider implements AuthenticationProviderInterface
         }
 
         // Valide que le nonce est unique dans les 5 minutes
-        if (file_exists($this->cacheDir.'/'.$nonce) && file_get_contents($this->cacheDir.'/'.$nonce) + 300 > time()) {
+        // Le nonce peut contenir des '/' ce qui n'est pas autorisé dans un nom de fichier
+        // On encrypte donc le nonce via md5 pour prévenir ce problème
+        $cacheKey = md5($nonce);
+        if (file_exists($this->cacheDir.'/'.$cacheKey) && file_get_contents($this->cacheDir.'/'.$cacheKey) + 300 > time()) {
             throw new NonceExpiredException('Previously used nonce detected');
         }
 
-        @file_put_contents($this->cacheDir.'/'.$nonce, time());
+        file_put_contents($this->cacheDir.'/'.$cacheKey, time());
         // Valide le Secret
         $expected = base64_encode(sha1(base64_decode($nonce).$created.$secret, true));
 
