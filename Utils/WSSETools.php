@@ -10,7 +10,7 @@ class WSSETools
 {
     public static function generateWsseHeader($username, $secret)
     {
-        $nonce = md5(rand(), true);
+        $nonce = md5(uniqid(), true);
         $created = gmdate('Y-m-d\TH:i:s\Z');
     
         $digest = base64_encode(sha1($nonce.$created.$secret, true));
