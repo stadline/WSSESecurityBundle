@@ -1,16 +1,16 @@
 services:
     wsse.security.authentication.provider:
         class: Stadline\WSSESecurityBundle\Security\Authentication\Provider\WsseProvider
-        arguments: ['', %kernel.cache_dir%/security/nonces, "%stadline_wsse_security.security_enabled%"]
+        arguments: ['', %kernel.cache_dir%/security/nonces, %stadline_wsse_security.security_enabled%]
     
     wsse.security.authentication.listener:
         class: Stadline\WSSESecurityBundle\Security\Firewall\WsseListener
-        arguments: [@security.context, @security.authentication.manager]
+        arguments: ['@security.context', '@security.authentication.manager']
         
     stadline.wsse.partner_manager:
         class: Stadline\WSSESecurityBundle\Manager\PartnerManager
-        arguments: [@doctrine.orm.default_entity_manager]
+        arguments: ['@doctrine.orm.default_entity_manager']
         
     api.partner.user.provider:
         class: Stadline\WSSESecurityBundle\Security\User\PartnerUserProvider
-        arguments: [@stadline.wsse.partner_manager]
+        arguments: ['@stadline.wsse.partner_manager']
