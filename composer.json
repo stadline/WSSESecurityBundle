@@ -2,9 +2,9 @@
     "name": "stadline/wsse-security-bundle",
     "description": "Provide easy access to wsse provider",
     "require": {
-        "doctrine/doctrine-bundle": "~1.0",
+        "doctrine/doctrine-bundle": "~1.8",
         "symfony/security": "~2.2",
-        "symfony/framework-bundle": "~2.3"
+        "symfony/framework-bundle": "^3.0"
     },
     "authors": [
         {
