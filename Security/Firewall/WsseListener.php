@@ -26,17 +26,12 @@ class WsseListener implements ListenerInterface
     public function handle(GetResponseEvent $event)
     {
         $request = $event->getRequest();
-        
+
         //WSSE Part
         $wsseRegex = '/UsernameToken Username="([^"]+)", PasswordDigest="([^"]+)", Nonce="([^"]+)", Created="([^"]+)"/';
         if (!$request->headers->has('x-wsse') ||
             1 !== preg_match($wsseRegex, $request->headers->get('x-wsse'), $matches)
         ) {
-            
-            // no x-wsse or false x-wsse, deny authentication with a '401 Unauthorized'
-            $response = new Response();
-            $response->setStatusCode(401);
-            $event->setResponse($response);
             return;
         }
 
