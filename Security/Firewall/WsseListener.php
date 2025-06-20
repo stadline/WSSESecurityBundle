@@ -30,13 +30,11 @@ class WsseListener implements ListenerInterface
 
         //WSSE Part
         $wsseRegex = '/UsernameToken Username="([^"]+)", PasswordDigest="([^"]+)", Nonce="([^"]+)", Created="([^"]+)"/';
-        if (!$request->headers->has('x-wsse') ||
-            1 !== preg_match($wsseRegex, $request->headers->get('x-wsse'), $matches)
+        if (!$request->headers->has('x-wsse')) {
+            throw new AccessDeniedHttpException();
+        }
+        if (1 !== preg_match($wsseRegex, $request->headers->get('x-wsse'), $matches)
         ) {
-            if (! $request->headers->has('Authorization')) {
-                throw new AccessDeniedHttpException();
-            }
-
             return;
         }
 
